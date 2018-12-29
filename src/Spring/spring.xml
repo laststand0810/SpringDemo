@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    
+    
+    <!--
+        First way of declaration.
+    -->
+    <bean id="triangle" class="Drawing.Triangle" >
+        <property name="A" ref="pointA"/>
+        <property name="B" ref="pointB"/>
+        <property name="C" ref="pointC"/>
+        
+    </bean>
+    
+    <bean id="pointA" class="Drawing.Point">
+        <property name="x" value="5.0"/>
+        <property name="y" value="7.0"/>
+    </bean>
+    
+    <bean id="pointB" class="Drawing.Point">
+        <property name="x" value="2.0"/>
+        <property name="y" value="1.0"/>
+    </bean>
+    
+    <bean id="pointC" class="Drawing.Point">
+        <property name="x" value="4.0"/>
+        <property name="y" value="0.0"/>
+    </bean>
+    
+    
+    <!-- 
+    Second way of declaration.
+    -->
+    <bean id="special-triangle" class="Drawing.Triangle" >
+        <constructor-arg name="A">
+            <bean class="Drawing.Point">
+                <property name="x" value="1.5"/>
+                <property name="y" value="3.0"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg name="B">
+            <bean class="Drawing.Point">
+                <property name="x" value="2.5"/>
+                <property name="y" value="3.1"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg name="C">
+            <bean class="Drawing.Point">
+                <property name="x" value="12"/>
+                <property name="y" value="3.05"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+    
+    <!--
+    bean for polygon
+    -->
+    <bean id="polygon" class="Drawing.Polygon">
+        <property name="points">
+            <list>
+                <ref bean="pointA"/>
+                <ref bean="pointB"/>
+                <ref bean="pointC"/>
+                <bean id="pointD" class="Drawing.Point">
+                    <property name="x" value="32"/>
+                    <property name="y" value="32"/>
+                </bean>
+            </list>
+        </property>
+            
+    </bean>
+</beans>
